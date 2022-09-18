@@ -1038,15 +1038,14 @@ LDFLAGS_vmlinux += --build-id=sha1
 
 # ASUS_BSP +++ Add ASUS build option to KBUILD_CPPFLAGS
 
-# add ASUS user/userdebug/ASUS_FTM/DXO build option
-ifneq ($(TARGET_BUILD_VARIANT),user)
+# Build production kernel unless build variant is set to
+# engineering or FTM flag is enabled.
 ifeq ($(ASUS_FTM),y)
-KBUILD_CPPFLAGS += -DASUS_FTM_BUILD=1
+  KBUILD_CPPFLAGS += -DASUS_FTM_BUILD=1
+else ifeq ($(TARGET_BUILD_VARIANT),eng)
+  KBUILD_CPPFLAGS += -DASUS_USERDEBUG_BUILD=1
 else
-KBUILD_CPPFLAGS += -DASUS_USERDEBUG_BUILD=1
-endif
-else
-KBUILD_CPPFLAGS += -DASUS_USER_BUILD=1
+  KBUILD_CPPFLAGS += -DASUS_USER_BUILD=1
 endif
 
 # Add ASUS build Project to KBUILD_CPPFLAGS
