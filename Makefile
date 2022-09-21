@@ -1053,15 +1053,12 @@ ifneq (,$(filter AI2201,$(ASUS_BUILD_PROJECT)))
 KBUILD_CPPFLAGS += -DASUS_AI2201_PROJECT=1
 endif
 
-ifeq ($(ASUS_GKI_BUILD),y)
-$(warning "build with GKI")
-KBUILD_CPPFLAGS += -DASUS_GKI_BUILD=1
-else
-$(warning "build without GKI")
-endif
-
 ifneq (,$(filter AI2202,$(ASUS_BUILD_PROJECT)))
 KBUILD_CPPFLAGS += -DASUS_AI2202_PROJECT=1
+endif
+
+ifeq ($(KERNEL_VARIANT),gki)
+  KBUILD_CPPFLAGS += -DASUS_GKI_BUILD=1
 endif
 
 #ASUS_BUILD_NUMBER := $(BUILD_NUMBER_FROM_FILE)
