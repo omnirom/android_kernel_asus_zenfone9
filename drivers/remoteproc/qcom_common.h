@@ -86,7 +86,15 @@ uint32_t qcom_sysmon_get_txn_id(struct qcom_sysmon *sysmon);
 int qcom_sysmon_get_reason(struct qcom_sysmon *sysmon, char *buf, size_t len);
 void qcom_sysmon_register_ssr_subdev(struct qcom_sysmon *sysmon,
 				struct rproc_subdev *ssr_subdev);
+
+extern void subsys_save_reason(const char *name, char *reason);/*AS-K ASUS SSR and Debug+*/
+
 #else
+static inline void subsys_save_reason(const char *name, char *reason)/*AS-K ASUS SSR and Debug+*/
+{
+	return;
+}
+
 static inline void qcom_sysmon_register_ssr_subdev(struct qcom_sysmon *sysmon,
 				struct rproc_subdev *ssr_subdev)
 {

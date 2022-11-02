@@ -2414,7 +2414,7 @@ static int gen7_boot(struct adreno_device *adreno_dev)
 	struct kgsl_device *device = KGSL_DEVICE(adreno_dev);
 	int ret;
 
-	if (WARN_ON(test_bit(GMU_PRIV_GPU_STARTED, &gmu->flags)))
+	if (test_bit(GMU_PRIV_GPU_STARTED, &gmu->flags))
 		return 0;
 
 	trace_kgsl_pwr_request_state(device, KGSL_STATE_ACTIVE);
@@ -2539,6 +2539,15 @@ static int gen7_power_off(struct adreno_device *adreno_dev)
 	int ret;
 
 	WARN_ON(!test_bit(GMU_PRIV_GPU_STARTED, &gmu->flags));
+
+	/*
+	* If this config is enabled, the smmu driver keeps the cx gdsc always
+	* ON. So it is better if we don't turn off the GPU
+	*/
+	if (IS_ENABLED(CONFIG_ARM_SMMU_POWER_ALWAYS_ON))
+		return 0;
+
+	trace_kgsl_pwr_request_state(device, KGSL_STATE_SLUMBER);
 
 	adreno_suspend_context(device);
 
@@ -2697,8 +2706,7 @@ static int gen7_gmu_active_count_get(struct adreno_device *adreno_dev)
 	if (test_bit(GMU_PRIV_PM_SUSPEND, &gmu->flags))
 		return -EINVAL;
 
-	if ((atomic_read(&device->active_cnt) == 0) &&
-		!test_bit(GMU_PRIV_GPU_STARTED, &gmu->flags))
+	if (atomic_read(&device->active_cnt) == 0)
 		ret = gen7_boot(adreno_dev);
 
 	if (ret == 0)

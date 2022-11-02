@@ -244,6 +244,7 @@ static int tmc_etr_byte_cntr_release(struct inode *in, struct file *fp)
 
 static int tmc_etr_byte_cntr_open(struct inode *in, struct file *fp)
 {
+	long offset;
 	struct byte_cntr *byte_cntr_data =
 			container_of(in->i_cdev, struct byte_cntr, dev);
 	struct tmc_drvdata *tmcdrvdata = byte_cntr_data->tmcdrvdata;
@@ -273,6 +274,9 @@ static int tmc_etr_byte_cntr_open(struct inode *in, struct file *fp)
 	nonseekable_open(in, fp);
 	byte_cntr_data->enable = true;
 	byte_cntr_data->read_active = true;
+
+	offset = tmc_get_rwp_offset(tmcdrvdata);
+
 	byte_cntr_data->total_size = 0;
 	byte_cntr_data->offset = tmc_get_rwp_offset(tmcdrvdata);
 	mutex_unlock(&byte_cntr_data->byte_cntr_lock);
