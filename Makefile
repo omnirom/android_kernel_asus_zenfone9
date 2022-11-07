@@ -1066,7 +1066,7 @@ KBUILD_CPPFLAGS += -DASUS_AI2202_PROJECT=1
 endif
 
 #ASUS_BUILD_NUMBER := $(BUILD_NUMBER_FROM_FILE)
-ASUS_BUILD_NUMBER := $(shell cat $(srctree)/../../out/soong/build_number.txt)
+ASUS_BUILD_NUMBER := $(shell cat $(srctree)/../../../out/soong/build_number.txt)
 $(warning ASUS_BUILD_NUMBER: $(ASUS_BUILD_NUMBER))
 ifneq ($(ASUS_BUILD_NUMBER),)
        KBUILD_CPPFLAGS += -DASUS_SW_VER=\"$(ASUS_BUILD_NUMBER)\"
