@@ -4,6 +4,8 @@ ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY), y)
 # Since Kernel SI can support multiple ARCH's this allows only the current selected target ARCH
 # to compile.
 
+CAMERA_DEVICETREE_ROOT := $(srctree)/$(src)
+
 ifneq (,$(filter AI2201,$(ASUS_BUILD_PROJECT)))
 
 $(warning build camera dtbo for AI2201 8450/8475 ...)
