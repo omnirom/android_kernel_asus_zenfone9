@@ -1,6 +1,20 @@
+# We can build either as part of a standalone Kernel build or as
+# an external module.  Determine which mechanism is being used
+ifeq ($(MODNAME),)
+	KERNEL_BUILD := 1
+else
+	KERNEL_BUILD := 0
+endif
+
 # SPDX-License-Identifier: GPL-2.0-only
 DATAIPADRVTOP = $(srctree)/techpack/dataipa/drivers/platform/msm
 
+ifeq ($(KERNEL_BUILD), 1)
+	LINUXINCLUDE    += -include $(srctree)/techpack/dataipa/config/dataipa_vendor.h
+	include $(srctree)/techpack/dataipa/config/dataipa_GKI.conf
+endif
+
+ifeq ($(KERNEL_BUILD), 0)
 #MSMs - GKI
 ifeq ($(filter $(CONFIG_ARCH_LAHAINA) $(CONFIG_ARCH_HOLI), y),y)
 LINUXINCLUDE    += -include $(srctree)/techpack/dataipa/config/dataipa.h
@@ -51,6 +65,7 @@ include $(srctree)/techpack/dataipa/config/sa410mdataipa_QGKI.conf
 ifneq ($(CONFIG_LOCALVERSION), "-perf")
 include $(srctree)/techpack/dataipa/config/dataipa_debug.conf
 LINUXINCLUDE    += -include $(srctree)/techpack/dataipa/config/dataipa_debug.h
+endif
 endif
 endif
 
