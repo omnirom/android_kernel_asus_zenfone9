@@ -1,4 +1,4 @@
-CAMERA_KERNEL_ROOT=$(HOME)/omni/vendor/qcom/opensource/devicetree/camera-kernel
+CAMERA_KERNEL_ROOT := $(srctree)/techpack/camera
 CAMERA_DEVICETREE_ROOT=$(KERNEL_SRC)/$(M)
 
 KBUILD_OPTIONS += CAMERA_DEVICETREE_ROOT=$(KERNEL_SRC)/$(M)
