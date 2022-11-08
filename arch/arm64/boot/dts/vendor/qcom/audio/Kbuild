@@ -81,3 +81,5 @@ endif
  always-y    := $(dtb-y) $(dtbo-y)
  subdir-y    := $(dts-dirs)
  clean-files    := *.dtb *.dtbo
+
+KBUILD_DTC_INCLUDE := $(srctree)/techpack/audio/include
