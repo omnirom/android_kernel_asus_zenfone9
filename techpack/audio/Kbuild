@@ -1,5 +1,28 @@
 obj-y := dsp/ ipc/ soc/ asoc/ asoc/codecs/ asoc/codecs/lpass-cdc/ asoc/codecs/wsa883x/ asoc/codecs/wcd938x/ asoc/codecs/wcd937x/
 
+AUDIO_ROOT := $(srctree)/techpack/audio
+
+COMMON_INC :=	-I$(AUDIO_ROOT)/include
+INCS +=		$(COMMON_INC)
+EXTRA_CFLAGS += $(INCS)
+
+
+ifeq ($(CONFIG_ARCH_WAIPIO), y)
+	LINUXINCLUDE    += -include $(AUDIO_ROOT)/config/waipioautoconf.h
+	include $(AUDIO_ROOT)/config/waipioauto.conf
+endif
+
+# Use USERINCLUDE when you must reference the UAPI directories only.
+USERINCLUDE     += \
+                -I$(srctree)/techpack/audio/include/uapi/audio
+
+# Use LINUXINCLUDE when you must reference the include/ directory.
+# Needed to be compatible with the O= option
+LINUXINCLUDE    += \
+                -I$(srctree)/techpack/audio/include/uapi \
+                -I$(srctree)/techpack/audio/include/uapi/audio \
+                -I$(srctree)/techpack/audio/include
+
 ifeq ($(ASUS_AI2201_AUDIO), y)
 $(warning build audio cs35l45 in Kbuild for AI2201...)
 obj-y += asoc/codecs/cs35l45/
