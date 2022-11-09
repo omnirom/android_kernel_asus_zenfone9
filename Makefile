@@ -1039,15 +1039,8 @@ LDFLAGS_vmlinux += --build-id=sha1
 # ASUS_BSP +++ Add ASUS build option to KBUILD_CPPFLAGS
 
 # add ASUS user/userdebug/ASUS_FTM/DXO build option
-ifneq ($(TARGET_BUILD_VARIANT),user)
-ifeq ($(ASUS_FTM),y)
 KBUILD_CPPFLAGS += -DASUS_FTM_BUILD=1
-else
-KBUILD_CPPFLAGS += -DASUS_USERDEBUG_BUILD=1
-endif
-else
-KBUILD_CPPFLAGS += -DASUS_USER_BUILD=1
-endif
+KBUILD_CPPFLAGS += -DASUS_SHIP_BUILD=1
 
 # Add ASUS build Project to KBUILD_CPPFLAGS
 ifneq (,$(filter AI2201,$(ASUS_BUILD_PROJECT)))
