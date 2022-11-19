@@ -1,5 +1,0 @@
-#include "neo-pmic-overlay.dtsi"
-#include "neo-thermal-overlay.dtsi"
-
-&soc {
-};
