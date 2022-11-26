@@ -79,6 +79,7 @@ struct battery_chg_dev {
 	struct completion		fw_update_ack;
 	struct psy_state		psy_list[PSY_TYPE_MAX];
 	struct dentry			*debugfs_dir;
+	void				*notifier_cookie;
 	u32				*thermal_levels;
 	const char			*wls_fw_name;
 	int				curr_thermal_level;
@@ -101,9 +102,11 @@ struct battery_chg_dev {
 	u32				restrict_fcc_ua;
 	u32				last_fcc_ua;
 	u32				usb_icl_ua;
+	u32				thermal_fcc_step;
 	bool				restrict_chg_en;
 	/* To track the driver initialization status */
 	bool				initialized;
+	bool				notify_en;
 };
 //[---] ASUS_BSP : Add for sub-function
 #endif
