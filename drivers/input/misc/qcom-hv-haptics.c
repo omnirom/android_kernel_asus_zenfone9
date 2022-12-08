@@ -4254,8 +4254,8 @@ static int haptics_add_debugfs(struct dentry *hap_dir, struct haptics_effect *ef
 
 static int haptics_create_debugfs(struct haptics_chip *chip)
 {
-	struct dentry *hap_dir, *effect_dir, *file, *test_dir;
-	int rc, i;
+	struct dentry *hap_dir, *file, *test_dir;
+	int rc;
 
 	hap_dir = debugfs_create_dir("haptics", NULL);
 	if (IS_ERR(hap_dir)) {
@@ -4274,37 +4274,52 @@ static int haptics_create_debugfs(struct haptics_chip *chip)
 		goto exit;
 
 //BSP add for vibrator test +++
-		test_dir = debugfs_create_dir("vibrator_test", hap_dir);
-		if (IS_ERR(test_dir)) {
-			rc = PTR_ERR(test_dir);
-			dev_err(chip->dev, "create vibrator_test debugfs directory failed, rc=%d\n", rc);
-			goto exit;
-		}
+	test_dir = debugfs_create_dir("vibrator_test", hap_dir);
+	if (IS_ERR(test_dir)) {
+		rc = PTR_ERR(test_dir);
+		dev_err(chip->dev, "create vibrator_test debugfs directory failed, rc=%d\n", rc);
+		goto exit;
+	}
 
-		file = debugfs_create_file_unsafe("short_vibrate", 0644, test_dir,
-				chip, &short_vibrate_ops);
-		if (IS_ERR(file))
-			return PTR_ERR(file);
+	file = debugfs_create_file_unsafe("short_vibrate", 0644, test_dir,
+			chip, &short_vibrate_ops);
+	if (IS_ERR(test_dir)) {
+		rc = PTR_ERR(test_dir);
+		dev_err(chip->dev, "create short_vibrate debugfs directory failed, rc=%d\n", rc);
+		goto exit;
+	}
 
-		file = debugfs_create_file_unsafe("constant_vmax", 0644, test_dir,
-				chip, &constant_vmax_ops);
-		if (IS_ERR(file))
-			return PTR_ERR(file);
+	file = debugfs_create_file_unsafe("constant_vmax", 0644, test_dir,
+			chip, &constant_vmax_ops);
+	if (IS_ERR(test_dir)) {
+		rc = PTR_ERR(test_dir);
+		dev_err(chip->dev, "create constant_vmax debugfs directory failed, rc=%d\n", rc);
+		goto exit;
+	}
 
-		file = debugfs_create_file_unsafe("long_vibrate", 0644, test_dir,
-				chip, &long_vibrate_ops);
-		if (IS_ERR(file))
-			return PTR_ERR(file);
+	file = debugfs_create_file_unsafe("long_vibrate", 0644, test_dir,
+			chip, &long_vibrate_ops);
+	if (IS_ERR(test_dir)) {
+		rc = PTR_ERR(test_dir);
+		dev_err(chip->dev, "create long_vibrate debugfs directory failed, rc=%d\n", rc);
+		goto exit;
+	}
 
-		file = debugfs_create_file_unsafe("fifo_vibrate", 0644, test_dir,
-				chip, &fifo_vibrate_ops);
-		if (IS_ERR(file))
-			return PTR_ERR(file);
+	file = debugfs_create_file_unsafe("fifo_vibrate", 0644, test_dir,
+			chip, &fifo_vibrate_ops);
+	if (IS_ERR(test_dir)) {
+		rc = PTR_ERR(test_dir);
+		dev_err(chip->dev, "create fifo_vibrate debugfs directory failed, rc=%d\n", rc);
+		goto exit;
+	}
 
-		file = debugfs_create_file_unsafe("stop_vibrate", 0644, test_dir,
-				chip, &stop_vibrate_ops);
-		if (IS_ERR(file))
-			return PTR_ERR(file);
+	file = debugfs_create_file_unsafe("stop_vibrate", 0644, test_dir,
+			chip, &stop_vibrate_ops);
+	if (IS_ERR(test_dir)) {
+		rc = PTR_ERR(test_dir);
+		dev_err(chip->dev, "create stop_vibrate debugfs directory failed, rc=%d\n", rc);
+		goto exit;
+	}
 //BSP add for vibrator test ---
 
 	file = debugfs_create_file_unsafe("preload_effect_idx", 0644, hap_dir,
