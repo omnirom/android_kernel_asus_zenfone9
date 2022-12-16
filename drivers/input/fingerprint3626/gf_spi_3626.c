@@ -103,8 +103,6 @@ static struct gf_key_map maps[] = {
 	{ EV_KEY, GF_NAV_INPUT_LEFT },
 	{ EV_KEY, GF_KEY_INPUT_CAMERA },
 	{ EV_KEY, GF_NAV_INPUT_CLICK },
-	{ EV_KEY, GF_NAV_INPUT_DOUBLE_CLICK },
-	{ EV_KEY, GF_NAV_INPUT_LONG_PRESS },
 //	{ EV_KEY, GF_NAV_INPUT_HEAVY }, //remove unused key;asus_bsp++;
 #endif
 };
@@ -310,16 +308,6 @@ static void nav_event_input(struct gf_dev *gf_dev, gf_nav_event_t nav_event)
 		break;
 #endif //remove unused key event;asus_bsp--;
 
-	case GF_NAV_LONG_PRESS:
-		nav_input = GF_NAV_INPUT_LONG_PRESS;
-		pr_info("[GF][%s] nav long press\n", __func__);
-		break;
-
-	case GF_NAV_DOUBLE_CLICK:
-		nav_input = GF_NAV_INPUT_DOUBLE_CLICK;
-		pr_info("[GF][%s] nav double click\n", __func__);
-		break;
-
 	default:
 		pr_warn("[GF][%s] unknown nav event: %d\n", __func__, nav_event);
 		break;
@@ -365,15 +353,6 @@ static void gf_kernel_key_input(struct gf_dev *gf_dev, struct gf_key *gf_key)
 		input_sync(gf_dev->input);
 	}
 
-//report earlywakeup event (832);asus_bsp++
-	if ((gf_key->key == 832 || gf_key->key == 834) && (gf_key->value == 1))
-	{
-		pr_info("[GF][%s] received key 832, send earlywakeup event F22\n", __func__);
-		input_report_key(gf_dev->input, GF_KEY_INPUT_EARLYWAKEUP, 1);
-		input_sync(gf_dev->input);
-		input_report_key(gf_dev->input, GF_KEY_INPUT_EARLYWAKEUP, 0);
-		input_sync(gf_dev->input);
-	}
 //report earlywakeup event (832);asus_bsp--
 }
 
