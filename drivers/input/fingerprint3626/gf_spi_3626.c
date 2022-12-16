@@ -103,7 +103,6 @@ static struct gf_key_map maps[] = {
 	{ EV_KEY, GF_KEY_INPUT_CAMERA },
 	{ EV_KEY, GF_NAV_INPUT_CLICK },
 	{ EV_KEY, GF_NAV_INPUT_DOUBLE_CLICK },
-	{ EV_KEY, GF_NAV_INPUT_LONG_PRESS },
 //	{ EV_KEY, GF_NAV_INPUT_HEAVY }, //remove unused key;asus_bsp++;
 #endif
 };
@@ -308,11 +307,6 @@ static void nav_event_input(struct gf_dev *gf_dev, gf_nav_event_t nav_event)
 		pr_info("%s nav heavy\n", __func__);
 		break;
 #endif //remove unused key event;asus_bsp--;
-
-	case GF_NAV_LONG_PRESS:
-		nav_input = GF_NAV_INPUT_LONG_PRESS;
-		pr_info("[GF][%s] nav long press\n", __func__);
-		break;
 
 	case GF_NAV_DOUBLE_CLICK:
 		nav_input = GF_NAV_INPUT_DOUBLE_CLICK;
