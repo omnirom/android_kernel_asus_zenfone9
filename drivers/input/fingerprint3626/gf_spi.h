@@ -39,8 +39,6 @@ enum FP_MODE {
 #define GF_NAV_INPUT_LEFT		KEY_LEFT  //105
 #define GF_NAV_INPUT_RIGHT		KEY_RIGHT //106
 #define GF_NAV_INPUT_CLICK		KEY_F17  //187
-#define GF_NAV_INPUT_DOUBLE_CLICK	KEY_F18  //188
-#define GF_NAV_INPUT_LONG_PRESS		KEY_F19  //189
 #define GF_NAV_INPUT_HEAVY		KEY_CHAT
 #endif
 
@@ -59,7 +57,6 @@ enum FP_MODE {
 #define GF_KEY_INPUT_BACK		KEY_BACK
 #define GF_KEY_INPUT_POWER		KEY_POWER
 #define GF_KEY_INPUT_CAMERA		KEY_CAMERA
-#define GF_KEY_INPUT_EARLYWAKEUP	KEY_F22
 
 #if defined(SUPPORT_NAV_EVENT)
 typedef enum gf_nav_event {
@@ -72,8 +69,6 @@ typedef enum gf_nav_event {
 	GF_NAV_RIGHT,
 	GF_NAV_CLICK,
 	GF_NAV_HEAVY,
-	GF_NAV_LONG_PRESS,
-	GF_NAV_DOUBLE_CLICK,
 } gf_nav_event_t;
 #endif
 
