@@ -393,6 +393,7 @@ static void asus_kernel_top_cal(struct _asus_kernel_top *ktop, int type)
 	struct task_struct *process;
 	struct task_cputime cputime;
 	ulong flags;
+	u64 cputime_totaltime;
 
 	if (ktop->task_ptr_array == NULL ||
 		ktop->curr_proc_delta == NULL ||
@@ -408,8 +409,13 @@ static void asus_kernel_top_cal(struct _asus_kernel_top *ktop, int type)
 		//thread_group_cputime(process, &cputime);
 		thread_group_cputime_adjusted(process, &cputime.utime, &cputime.stime);
 		if (process->pid < MAX_PID) {
+
+			cputime_totaltime = cputime.utime + cputime.stime;
+			if (cputime_totaltime < (ktop->prev_proc_stat[process->pid])){
+				ktop->prev_proc_stat[process->pid] = 0;
+			}
 			ktop->curr_proc_delta[process->pid] =
-				(cputime.utime + cputime.stime) - ktop->prev_proc_stat[process->pid];
+				cputime_totaltime - ktop->prev_proc_stat[process->pid];
 			ktop->task_ptr_array[process->pid] = process;
 
 			if (ktop->curr_proc_delta[process->pid] > 0) {

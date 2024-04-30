@@ -71,6 +71,9 @@ function build_defconfig_fragments() {
 			if [ "${TARGET_BUILD_VARIANT}" = user ]; then
 				echo "[BUILD] user config ${ASUS_BUILD_PROJECT}_perf.config"
 				apply_defconfig_fragment ${KERNEL_DIR}/arch/${ARCH}/configs/vendor/${ASUS_BUILD_PROJECT}_perf.config  vendor/${MSM_ARCH}-gki_defconfig
+			elif [ "${TARGET_BUILD_VARIANT}" = userdebug ]; then
+				echo "[BUILD] as gki debug build, so also use config ${ASUS_BUILD_PROJECT}_perf.config"
+				apply_defconfig_fragment ${KERNEL_DIR}/arch/${ARCH}/configs/vendor/${ASUS_BUILD_PROJECT}_perf.config vendor/${MSM_ARCH}-gki_defconfig
 			else
 				echo "[BUILD] default ${MSM_ARCH}_GKI.config for debug"
 				apply_defconfig_fragment ${KERNEL_DIR}/arch/${ARCH}/configs/vendor/${MSM_ARCH}_GKI.config  vendor/${MSM_ARCH}-gki_defconfig
