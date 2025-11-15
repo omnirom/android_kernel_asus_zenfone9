@@ -1089,6 +1089,12 @@ ifeq ($(CONFIG_RELR),y)
 LDFLAGS_vmlinux	+= --pack-dyn-relocs=relr --use-android-relr-tags
 endif
 
+# Add ASUS build Project to KBUILD_CPPFLAGS
+ifneq (,$(filter AI2202,$(ASUS_BUILD_PROJECT)))
+KBUILD_CPPFLAGS += -DASUS_AI2202_PROJECT=1
+endif
+
+
 # We never want expected sections to be placed heuristically by the
 # linker. All sections should be explicitly named in the linker script.
 ifdef CONFIG_LD_ORPHAN_WARN
