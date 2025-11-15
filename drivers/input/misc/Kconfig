@@ -889,4 +889,28 @@ config INPUT_STPMIC1_ONKEY
 	  To compile this driver as a module, choose M here: the
 	  module will be called stpmic1_onkey.
 
+config ASUS_HALL_SENSOR1
+       tristate "ASUS_HALL_SENSOR1"
+	help
+	 Say y here if you want to use this hall sensor driver, it
+	 can get magnetic data form xyz-axis.
+
+config ASUS_HALL_SENSOR2
+       tristate "ASUS_HALL_SENSOR2"
+	help
+	 Say y here if you want to use this hall2 sensor driver, it
+	 can get magnetic data form xyz-axis.
+
+config ASUS_HALL_SENSOR3
+       tristate "ASUS_HALL_SENSOR3"
+	help
+	 Say y here if you want to use this hall3 sensor driver, it
+	 can get magnetic data form xyz-axis.
+
+config ASUS_HALL_SENSOR1_1
+       tristate "ASUS_HALL_SENSOR1_1"
+	help
+	 Say y here if you want to use this hall1_1 sensor driver, it
+	 can get magnetic data form xyz-axis.
+
 endif

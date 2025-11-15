@@ -86,4 +86,8 @@ obj-$(CONFIG_INPUT_WM831X_ON)		+= wm831x-on.o
 obj-$(CONFIG_INPUT_XEN_KBDDEV_FRONTEND)	+= xen-kbdfront.o
 obj-$(CONFIG_INPUT_YEALINK)		+= yealink.o
 obj-$(CONFIG_INPUT_IDEAPAD_SLIDEBAR)	+= ideapad_slidebar.o
+obj-$(CONFIG_ASUS_HALL_SENSOR1) += hall_sensor.o
+obj-$(CONFIG_ASUS_HALL_SENSOR2) += hall_sensor_2nd.o
+obj-$(CONFIG_ASUS_HALL_SENSOR3) += hall_sensor_3nd.o
+obj-$(CONFIG_ASUS_HALL_SENSOR1_1) += hall_sensor_1.o
 
