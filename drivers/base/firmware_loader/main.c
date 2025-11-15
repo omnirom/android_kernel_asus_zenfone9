@@ -521,6 +521,28 @@ fw_get_filesystem_firmware(struct device *device, struct fw_priv *fw_priv,
 			break;
 		}
 
+		/* ASUS BSP +++ */
+		if (!strncmp(fw_priv->fw_name, "slpi", 4)) {
+			snprintf(path, PATH_MAX, "%s/%s", "/vendor/firmware", fw_priv->fw_name);
+			dev_err(device, "[SLPI] Try to load firmware : %s \n", path);
+		}
+
+		if (!strncmp(fw_priv->fw_name, "amss20", 6)) {
+			snprintf(path, PATH_MAX, "%s", "/vendor/firmware/amss20.bin");
+			dev_err(device, "[wlan] Try to load firmware : %s \n", path);
+		}
+
+		if (!strncmp(fw_priv->fw_name, "regdb", 5)) {
+			snprintf(path, PATH_MAX, "%s", "/vendor/firmware/regdb.bin");
+			dev_err(device, "[wlan] Try to load firmware : %s \n", path);
+		}
+
+		if (!strncmp(fw_priv->fw_name, "m3.bin", 6)) {
+			snprintf(path, PATH_MAX, "%s", "/vendor/firmware/m3.bin");
+			dev_err(device, "[wlan] Try to load firmware : %s \n", path);
+		}
+		/* --- ASUS BSP ---*/
+
 		fw_priv->size = 0;
 
 		/*
