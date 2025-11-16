@@ -1240,6 +1240,11 @@ struct drm_connector {
 	 */
 	bool ycbcr_420_allowed;
 
+// ASUS_BSP +++
+	bool under_60hz_allowed;
+	bool wide_aspect_allowed;
+// ASUS_BSP ---
+
 	/**
 	 * @registration_state: Is this connector initializing, exposed
 	 * (registered) with userspace, or unregistered?
