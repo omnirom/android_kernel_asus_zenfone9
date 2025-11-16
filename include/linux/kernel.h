@@ -22,6 +22,14 @@
 
 #define STACK_MAGIC	0xdeadbeef
 
+// ASUS_BSP +++
+#define AI2202_EVB   35
+#define AI2202_SR    45
+#define AI2202_SR2   55
+#define AI2202_ER    65
+#define AI2202_PR    75
+// ASUS_BSP ---
+
 /**
  * REPEAT_BYTE - repeat the value @x multiple times as an unsigned long value
  * @x: value to repeat
